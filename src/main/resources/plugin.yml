@@ -1,0 +1,9 @@
+name: KumaReports
+version: '${project.version}'
+main: com.realxode.kumareports.KumaReports
+api-version: 1.18
+authors: [ RealXode ]
+description: Reports plugin
+softdepend: [ PlaceholderAPI ]
+commands:
+  report:
