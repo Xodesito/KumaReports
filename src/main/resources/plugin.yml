@@ -1,0 +1,4 @@
+name: KumaReports
+version: '${project.version}'
+main: com.xodesito.kumareports.KumaReports
+api-version: 1.19
