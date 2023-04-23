@@ -1,3 +1,4 @@
 database:
-  mongo:
+  mongodb:
+    enabled: true
     url: 'noSpecified'

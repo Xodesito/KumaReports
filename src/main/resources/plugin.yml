@@ -2,3 +2,11 @@ name: KumaReports
 version: '${project.version}'
 main: com.xodesito.kumareports.KumaReports
 api-version: 1.19
+commands:
+  kumareports:
+    description: KumaReports main command
+    usage: /kumareports
+    aliases: [ kr ]
+    permission: kumareports.help
+    default: true
+    tab-complete: 0

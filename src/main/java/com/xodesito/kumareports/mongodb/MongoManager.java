@@ -13,14 +13,13 @@ import org.bson.Document;
 public class MongoManager {
 
     private final KumaReports plugin;
-    private final String mongoUrl;
     private final MongoClient mongoClient;
     private final MongoDatabase database;
     private final MongoCollection<Document> coll;
 
     public MongoManager(KumaReports plugin) {
         this.plugin = plugin;
-        mongoUrl = plugin.getConfigFile().getString("database.mongoUrl");
+        String mongoUrl = plugin.getConfig().getString("database.mongodb.url");
         mongoClient = MongoClients.create(mongoUrl);
         database = mongoClient.getDatabase("kumareports");
         coll = database.getCollection("reports");
