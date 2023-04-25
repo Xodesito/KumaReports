@@ -13,4 +13,19 @@ discordBot:
     text: 'KumaReports!'
   # Set the channel ID to receive the reports
   reportsChannel: 'noSpecified'
+  report:
+    embed:
+      footerIcon: 'noIcon'
+      authorUrl: 'noUrl'
+      authorIcon: 'noIcon'
+      thumbnail: 'noThumbnail'
+      imageUrl: 'noImageUrl'
+      color: 'noColor'
+    fields:
+      reporter: true
+      reported: true
+      reason: true
+      reportId: true
+      date: true
+
 

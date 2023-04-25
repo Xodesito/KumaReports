@@ -1,0 +1,11 @@
+discord:
+  report:
+    embed:
+      title: 'New Report'
+      description: 'A new report has been created!'
+      footerText: '$date$'
+      authorText: 'KumaReports'
+      reporter: 'Reported by:'
+      reported: 'Player reported:'
+      reason: 'Reason:'
+      reportId: 'Report ID:'

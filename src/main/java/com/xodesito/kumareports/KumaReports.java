@@ -38,11 +38,7 @@ public final class KumaReports extends JavaPlugin {
         jdaManager.initDiscordBot();
 
         regCommands();
-
-
-//        /* Tests */
-//        reportManager = new ReportManager(this);
-//        reportManager.createReport(new Report(UUID.randomUUID(), "playerName!!", "Cheating"));
+        
     }
 
     @Override

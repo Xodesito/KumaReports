@@ -1,11 +1,17 @@
 package com.xodesito.kumareports.commands;
 
 import com.xodesito.kumareports.KumaReports;
+import com.xodesito.kumareports.report.Report;
+import com.xodesito.kumareports.report.ReportManager;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
+import java.util.UUID;
 
 public class MainCommand implements CommandExecutor {
 
@@ -37,7 +43,14 @@ public class MainCommand implements CommandExecutor {
                 plugin.reloadConfig();
                 plugin.getJdaManager().shutdownBot();
                 plugin.getJdaManager().initDiscordBot();
-                plugin.getJdaManager().sendEmbed();
+                EmbedBuilder embed = plugin.getJdaManager().createEmbed("Config reloaded!", "The config of the plugin was reloaded successfully!");
+                plugin.getJdaManager().setColorToEmbed(embed, Color.GREEN);
+                plugin.getJdaManager().sendEmbed(embed);
+
+                Report report = new Report(UUID.randomUUID(), "Xodesito", "Test");
+                ReportManager reportManager = plugin.getReportManager();
+                reportManager.createReport(report);
+                reportManager.sendReportToDiscord(report);
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lKumaReports &7&l| &fReloaded!"));
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
                         "&8&o(( &7&l&oNOTE: &8&oThis will not affect the connection to the database &8&o))"));
