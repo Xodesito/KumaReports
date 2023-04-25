@@ -31,14 +31,15 @@ public final class KumaReports extends JavaPlugin {
             return;
         }
 
+        System.out.println(getLangFile().getString("discord.report.embed.field.reported"));
         mongoManager = new MongoManager(this);
+        jdaManager = new JDAManager(this);
         reportManager = new ReportManager(this);
 
-        jdaManager = new JDAManager(this);
         jdaManager.initDiscordBot();
 
         regCommands();
-        
+
     }
 
     @Override

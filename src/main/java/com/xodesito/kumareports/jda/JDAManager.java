@@ -48,14 +48,10 @@ public class JDAManager {
         jda.shutdown();
     }
 
-    public void sendEmbed(EmbedBuilder embed) {
+    public void sendEmbedToLogsChannel(EmbedBuilder embed) {
         String id = plugin.getConfig().getString("discordBot.guildId");
-        String channelId = plugin.getConfig().getString("discordBot.reportsChannel");
-
-        System.out.println(id + " // " + channelId);
-
+        String channelId = plugin.getConfig().getString("discordBot.logsChannel");
         Guild guild = jda.getGuildById(id);
-        System.out.println(guild);
 
         if (guild == null) {
             System.out.println("Guild is null: ID = " + id);
@@ -63,7 +59,6 @@ public class JDAManager {
         }
 
         TextChannel channel = guild.getTextChannelById(channelId);
-        System.out.println(channel);
 
         if (channel == null) {
             System.out.println("Channel is null: ID = " + channelId);
@@ -72,6 +67,25 @@ public class JDAManager {
 
         channel.sendMessage(MessageCreateData.fromEmbeds(embed.build())).queue();
 
+    }
+
+    public void sendEmbedToChannel(EmbedBuilder embedBuilder, String channelId) {
+        String id = plugin.getConfig().getString("discordBot.guildId");
+        Guild guild = jda.getGuildById(id);
+
+        if (guild == null) {
+            System.out.println("Guild is null: ID = " + id);
+            return;
+        }
+
+        TextChannel channel = guild.getTextChannelById(channelId);
+
+        if (channel == null) {
+            System.out.println("Channel is null: ID = " + channelId);
+            return;
+        }
+
+        channel.sendMessage(MessageCreateData.fromEmbeds(embedBuilder.build())).queue();
     }
 
     public EmbedBuilder createEmbed(String title, String description) {

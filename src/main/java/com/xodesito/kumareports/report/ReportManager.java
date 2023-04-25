@@ -50,7 +50,7 @@ public class ReportManager {
                 plugin.getLangFile().getString("discord.report.embed.description"));
 
         // Footer, Thumbnail, Author, Image, Color
-        if (plugin.getLangFile().getString("discord.report.embed.footer.text").equalsIgnoreCase("$date$")) {
+        if (plugin.getLangFile().getString("discord.report.embed.footerText").equalsIgnoreCase("$date$")) {
             plugin.getJdaManager().setFooterToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.footerText")
                     .replace("$date$", String.valueOf(report.getDate())));
         } else {
@@ -62,13 +62,11 @@ public class ReportManager {
             plugin.getJdaManager().setFooterToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.footerText"),
                     plugin.getLangFile().getString("discord.report.embed.footer.icon"));
         }
-        if (plugin.getConfig().getString("discordBot.report.embed.thumbnail").equalsIgnoreCase("noThumbnail")) {
-            plugin.getJdaManager().addThumbnailToEmbed(embed, plugin.getConfig().getString("discordBot.report.embed.thumbnail"));
-        } else {
+        if (!plugin.getConfig().getString("discordBot.report.embed.thumbnail").equalsIgnoreCase("noThumbnail")) {
             plugin.getJdaManager().addThumbnailToEmbed(embed, plugin.getConfig().getString("discordBot.report.embed.thumbnail"));
         }
         if (plugin.getConfig().getString("discordBot.report.embed.authorUrl").equalsIgnoreCase("noUrl")
-                && plugin.getConfig().getString("discordBot.report.embed.authorIconUrl").equalsIgnoreCase("noIcon")) {
+                && plugin.getConfig().getString("discordBot.report.embed.authorIcon").equalsIgnoreCase("noIcon")) {
             plugin.getJdaManager().setAuthorToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.authorText"));
         } else {
             plugin.getJdaManager().setAuthorToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.authorText"),
@@ -87,7 +85,7 @@ public class ReportManager {
             plugin.getJdaManager().addFieldToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.field.reporter"), report.getReporterName(), true);
         }
         if (plugin.getConfig().getBoolean("discordBot.report.embed.fields.reported")) {
-            if (Bukkit.getPlayer(report.getReportedUuid()).getName() == null) {
+            if (Bukkit.getOfflinePlayer(report.getReportedUuid()).getName() == null) {
                 plugin.getJdaManager().addFieldToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.field.reported"),
                         report.getReportedUuid().toString(), true);
             } else {
@@ -101,6 +99,9 @@ public class ReportManager {
         if (plugin.getConfig().getBoolean("discordBot.report.embed.fields.reportId")) {
             plugin.getJdaManager().addFieldToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.field.reportId"), report.getId(), false);
         }
+
+        // Send
+        plugin.getJdaManager().sendEmbedToChannel(embed, plugin.getConfig().getString("discordBot.report.channelId"));
     }
 
 

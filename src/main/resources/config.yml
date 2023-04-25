@@ -12,8 +12,9 @@ discordBot:
     type: 'PLAYING'
     text: 'KumaReports!'
   # Set the channel ID to receive the reports
-  reportsChannel: 'noSpecified'
+  logsChannel: 'noSpecified'
   report:
+    channelId: 'noSpecified'
     embed:
       footerIcon: 'noIcon'
       authorUrl: 'noUrl'

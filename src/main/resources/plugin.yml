@@ -7,6 +7,6 @@ commands:
     description: KumaReports main command
     usage: /kumareports
     aliases: [ kr ]
-    permission: kumareports.help
+    permission: kumareports.admin
     default: true
     tab-complete: 0

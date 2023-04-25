@@ -5,7 +5,8 @@ discord:
       description: 'A new report has been created!'
       footerText: '$date$'
       authorText: 'KumaReports'
-      reporter: 'Reported by:'
-      reported: 'Player reported:'
-      reason: 'Reason:'
-      reportId: 'Report ID:'
+      field:
+        reporter: 'Reported by:'
+        reported: 'Player reported:'
+        reason: 'Reason:'
+        reportId: 'Report ID:'
