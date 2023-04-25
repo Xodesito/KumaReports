@@ -35,6 +35,9 @@ public class MainCommand implements CommandExecutor {
         switch (args[0].toLowerCase()) {
             case "reload":
                 plugin.reloadConfig();
+                plugin.getJdaManager().shutdownBot();
+                plugin.getJdaManager().initDiscordBot();
+                plugin.getJdaManager().sendEmbed();
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lKumaReports &7&l| &fReloaded!"));
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
                         "&8&o(( &7&l&oNOTE: &8&oThis will not affect the connection to the database &8&o))"));

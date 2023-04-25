@@ -2,3 +2,15 @@ database:
   mongodb:
     enabled: true
     url: 'noSpecified'
+discordBot:
+  enabled: true
+  token: 'noSpecified'
+  guildId: 'noSpecified'
+  # Valid status: ONLINE, IDLE, INVISIBLE, DO_NOT_DISTURB, OFFLINE
+  status: 'ONLINE'
+  activity:
+    type: 'PLAYING'
+    text: 'KumaReports!'
+  # Set the channel ID to receive the reports
+  reportsChannel: 'noSpecified'
+
