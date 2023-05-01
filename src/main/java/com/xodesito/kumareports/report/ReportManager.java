@@ -4,9 +4,12 @@ import com.xodesito.kumareports.KumaReports;
 import com.xodesito.kumareports.jda.JDAManager;
 import com.xodesito.kumareports.mongodb.MongoManager;
 import net.dv8tion.jda.api.EmbedBuilder;
+import org.bson.Document;
 import org.bukkit.Bukkit;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ReportManager {
@@ -41,21 +44,62 @@ public class ReportManager {
         return (Report) mongoManager.getReport(new Report(UUID.fromString(reportedUuid), null, null).toDocument());
     }
 
+    public List<Report> getReportsFromUuid(UUID uuid) {
+        ArrayList<Report> reports = new ArrayList<>();
+        for (Document document : mongoManager.getColl().find()) {
+            if (document.getString("reportedUuid").equalsIgnoreCase(uuid.toString())) {
+                reports.add(new Report(UUID.fromString(document.getString("reportedUuid")),
+                        document.getString("reporterName"),
+                        document.getString("reason")));
+            }
+        }
+
+        return reports;
+    }
+
+    public List<Report> getReportsToPlayer(String name) {
+        ArrayList<Report> reports = new ArrayList<>();
+        for (Document document : mongoManager.getColl().find()) {
+            if (document.getString("reporterName").equalsIgnoreCase(name)) {
+                reports.add(new Report(UUID.fromString(document.getString("reportedUuid")),
+                        document.getString("reporterName"),
+                        document.getString("reason")));
+            }
+        }
+
+        return reports;
+    }
+
+    public List<Report> getReportsByReason(String reason) {
+        ArrayList<Report> reports = new ArrayList<>();
+        for (Document document : mongoManager.getColl().find()) {
+            if (document.getString("reason").equalsIgnoreCase(reason)) {
+                reports.add(new Report(UUID.fromString(document.getString("reportedUuid")),
+                        document.getString("reporterName"),
+                        document.getString("reason")));
+            }
+        }
+
+        return reports;
+    }
+
     public Report getReportByReporterUuid(String reporterUuid) {
         return (Report) mongoManager.getReport(new Report(null, null, reporterUuid).toDocument());
     }
+
+    public List<Report> addReportsToList(List<Report> reports, UUID uuid) {
+        reports.addAll(getReportsFromUuid(uuid));
+        return reports;
+    }
+
 
     public void sendReportToDiscord(Report report) {
         EmbedBuilder embed = jdaManager.createEmbed(plugin.getLangFile().getString("discord.report.embed.title"),
                 plugin.getLangFile().getString("discord.report.embed.description"));
 
         // Footer, Thumbnail, Author, Image, Color
-        if (plugin.getLangFile().getString("discord.report.embed.footerText").equalsIgnoreCase("$date$")) {
-            plugin.getJdaManager().setFooterToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.footerText")
-                    .replace("$date$", String.valueOf(report.getDate())));
-        } else {
-            plugin.getJdaManager().setFooterToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.footerText"));
-        }
+        plugin.getJdaManager().setFooterToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.footerText")
+                .replace("$date$", report.getDate().toString()));
         if (plugin.getConfig().getString("discordBot.report.embed.footerIcon").equalsIgnoreCase("noIcon")) {
             plugin.getJdaManager().setFooterToEmbed(embed, plugin.getLangFile().getString("discord.report.embed.footerText"));
         } else {

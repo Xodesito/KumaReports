@@ -1,3 +1,35 @@
+command:
+  onlyPlayers: '&cOnly players can use this command!'
+report:
+  tabComplete:
+    1: '$playerList$'
+    2: '<type reason here, ex: cheating, flamming, etc>'
+  invalidArguments: '&cInvalid arguments! Use: &e/report <player> <reason>'
+  invalidPlayer: '&cInvalid player! Is that player online?'
+  reportedPlayer: '&aPlayer &e$player$ &areported! Reason: &e$reason$'
+  reportReceived: '&aNew report received! Use &e/reports &ato see the reports.'
+  consoleReportReceived: 'The player $player$ has been reported by $reporter$! Reason: $reason$'
+menus:
+  checkFrom:
+    title: 'Reports from $player$'
+    noReports: '&cNo reports found!'
+    nextPage: '&aNext page'
+    previousPage: '&aPrevious page'
+  checkTo:
+    title: 'Reports to $player$'
+    noReports: '&cNo reports found!'
+    nextPage: '&aNext page'
+    previousPage: '&aPrevious page'
+  report:
+    title: '&7Report &8#$reportId$'
+    reportedBy: '&7Reported by: &f$reporter$'
+    reported: '&7Reported: &f$reported$'
+    reason: '&7Reason: &f$reason$'
+    date: '&7Date: &f$date$'
+    status:
+      text: '&7Status: &f$status$'
+      open: '&aOPEN'
+      closed: '&cCLOSED'
 discord:
   report:
     embed:

@@ -2,7 +2,11 @@ package com.xodesito.kumareports;
 
 import com.xodesito.api.file.FileConfig;
 import com.xodesito.kumareports.commands.MainCommand;
+import com.xodesito.kumareports.commands.MainTabComplete;
+import com.xodesito.kumareports.commands.ReportCommand;
+import com.xodesito.kumareports.commands.ReportTabComplete;
 import com.xodesito.kumareports.jda.JDAManager;
+import com.xodesito.kumareports.menus.MenuListener;
 import com.xodesito.kumareports.mongodb.MongoManager;
 import com.xodesito.kumareports.report.ReportManager;
 import lombok.Getter;
@@ -39,6 +43,7 @@ public final class KumaReports extends JavaPlugin {
         jdaManager.initDiscordBot();
 
         regCommands();
+        regListeners();
 
     }
 
@@ -53,6 +58,13 @@ public final class KumaReports extends JavaPlugin {
 
     public void regCommands() {
         getCommand("kumareports").setExecutor(new MainCommand(this));
+        getCommand("report").setExecutor(new ReportCommand(this));
+        getCommand("kumareports").setTabCompleter(new MainTabComplete(this));
+        getCommand("report").setTabCompleter(new ReportTabComplete(this));
+    }
+
+    public void regListeners() {
+        getServer().getPluginManager().registerEvents(new MenuListener(this), this);
     }
 
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ public class Report {
     private String reporterName;
     private String reason;
     private Date date;
+    private ReportStatus status;
 
     public Report(UUID reportedUuid, String reporterName, String reason) {
         this.id = UUID.randomUUID().toString();
@@ -23,6 +25,7 @@ public class Report {
         this.reporterName = reporterName;
         this.reason = reason;
         this.date = new Date();
+        this.status = ReportStatus.OPEN;
     }
 
 
@@ -36,4 +39,19 @@ public class Report {
                 .append("reason", reason)
                 .append("date", date);
     }
+
+    public void setStatus(ReportStatus status) {
+        this.status = status;
+    }
+
+    public ReportStatus getStatus() {
+        return status;
+    }
+
+    public String getDateString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return formatter.format(date);
+    }
+
+
 }
