@@ -77,8 +77,8 @@ public class MainCommand implements CommandExecutor {
                     return true;
                 }
                 String name = args[1];
-                CheckReportsFromMenu menuFrom = new CheckReportsFromMenu(plugin, name, player);
-                menuFrom.openMenu();
+                CheckReportsFromMenu menuFrom = new CheckReportsFromMenu(plugin);
+                menuFrom.openMenu(name, player);
                 break;
             case "checkto":
                 player = (Player) sender;
@@ -88,8 +88,8 @@ public class MainCommand implements CommandExecutor {
                     return true;
                 }
                 name = args[1];
-                CheckReportsToMenu menuTo = new CheckReportsToMenu(plugin, name, player);
-                menuTo.openMenu();
+                CheckReportsToMenu menuTo = new CheckReportsToMenu(plugin);
+                menuTo.openMenu(name, player);
         }
         return true;
     }

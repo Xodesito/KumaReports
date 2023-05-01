@@ -3,6 +3,7 @@ package com.xodesito.kumareports.menus;
 import com.xodesito.kumareports.KumaReports;
 import com.xodesito.kumareports.report.Report;
 import com.xodesito.kumareports.report.ReportStatus;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,22 +17,21 @@ import java.util.List;
 import static com.xodesito.api.head.HeadHandler.getHead;
 import static com.xodesito.api.text.ChatUtil.translate;
 
+@Getter
 public class CheckReportsFromMenu {
 
     private final KumaReports plugin;
-    private final Inventory inventory;
-    private final String name;
-    private final Player player;
+    private Inventory inventory;
 
-    public CheckReportsFromMenu(KumaReports plugin, String name, Player player) {
+    public CheckReportsFromMenu(KumaReports plugin) {
         this.plugin = plugin;
-        this.name = name;
-        this.player = player;
-        this.inventory = plugin.getServer().createInventory(null, 54,
-                plugin.getLangFile().getString("menus.checkFrom.title").replace("$player$", name));
     }
 
-    public void openMenu() {
+    public void openMenu(String name, Player player) {
+
+        inventory = plugin.getServer().createInventory(null, 54,
+                plugin.getLangFile().getString("menus.checkFrom.title").replace("$player$", name));
+
         // Main item
         ItemStack itemStack = new ItemStack(Material.DIRT);
         ItemMeta itemMeta = itemStack.getItemMeta();

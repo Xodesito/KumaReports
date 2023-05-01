@@ -20,19 +20,17 @@ import static com.xodesito.api.text.ChatUtil.translate;
 public class CheckReportsToMenu {
 
     private final KumaReports plugin;
-    private final Inventory inventory;
-    String name;
-    Player player;
+    private Inventory inventory;
 
-    public CheckReportsToMenu(KumaReports plugin, String name, Player player) {
+    public CheckReportsToMenu(KumaReports plugin) {
         this.plugin = plugin;
-        this.name = name;
-        this.player = player;
-        this.inventory = plugin.getServer().createInventory(null, 54,
-                plugin.getLangFile().getString("menus.checkTo.title").replace("$player$", name));
     }
 
-    public void openMenu() {
+    public void openMenu(String name, Player player) {
+
+        inventory = plugin.getServer().createInventory(null, 54,
+                plugin.getLangFile().getString("menus.checkTo.title").replace("$player$", name));
+
         // Main item
         ItemStack itemStack = new ItemStack(Material.DIRT);
         ItemMeta itemMeta = itemStack.getItemMeta();

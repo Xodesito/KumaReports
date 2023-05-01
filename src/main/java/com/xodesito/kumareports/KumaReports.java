@@ -6,6 +6,8 @@ import com.xodesito.kumareports.commands.MainTabComplete;
 import com.xodesito.kumareports.commands.ReportCommand;
 import com.xodesito.kumareports.commands.ReportTabComplete;
 import com.xodesito.kumareports.jda.JDAManager;
+import com.xodesito.kumareports.menus.CheckReportsFromMenu;
+import com.xodesito.kumareports.menus.CheckReportsToMenu;
 import com.xodesito.kumareports.menus.MenuListener;
 import com.xodesito.kumareports.mongodb.MongoManager;
 import com.xodesito.kumareports.report.ReportManager;
@@ -19,6 +21,8 @@ public final class KumaReports extends JavaPlugin {
     private ReportManager reportManager;
     private FileConfig langFile;
     private JDAManager jdaManager;
+    private CheckReportsFromMenu checkReportsFromMenu;
+    private CheckReportsToMenu checkReportsToMenu;
 
     @Override
     public void onEnable() {
@@ -39,6 +43,7 @@ public final class KumaReports extends JavaPlugin {
         mongoManager = new MongoManager(this);
         jdaManager = new JDAManager(this);
         reportManager = new ReportManager(this);
+        checkReportsFromMenu = new CheckReportsFromMenu(this);
 
         jdaManager.initDiscordBot();
 
@@ -64,7 +69,7 @@ public final class KumaReports extends JavaPlugin {
     }
 
     public void regListeners() {
-        getServer().getPluginManager().registerEvents(new MenuListener(this), this);
+        getServer().getPluginManager().registerEvents(new MenuListener(this, checkReportsToMenu, checkReportsFromMenu), this);
     }
 
 }
