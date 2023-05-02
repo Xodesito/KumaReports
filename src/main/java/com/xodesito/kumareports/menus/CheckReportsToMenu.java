@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -17,7 +18,7 @@ import static com.xodesito.api.head.HeadHandler.getHead;
 import static com.xodesito.api.text.ChatUtil.translate;
 
 @Getter
-public class CheckReportsToMenu {
+public class CheckReportsToMenu implements InventoryHolder {
 
     private final KumaReports plugin;
     private Inventory inventory;
@@ -25,6 +26,7 @@ public class CheckReportsToMenu {
     public CheckReportsToMenu(KumaReports plugin) {
         this.plugin = plugin;
     }
+
 
     public void openMenu(String name, Player player) {
 
